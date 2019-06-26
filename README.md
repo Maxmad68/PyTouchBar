@@ -85,7 +85,7 @@ A button the user can click, that will call actions.
     def function(button):
       print ('Button clicked!')
 
-    label = TouchBarLabel(title = 'Click me!', action = function)
+    button = TouchBarButton(title = 'Click me!', action = function)
     
 ###### Parameters:
  - title (String or None) : The string that will be displayed in the button
@@ -96,4 +96,72 @@ A button the user can click, that will call actions.
  - action (function) : The function that will be called when the user touchs the button
  
  
+### TouchBarColorPicker
+
+A color picker right in the TouchBar.
+
+    def function(picker):
+      print ('Color:', picker.color)
+
+    cpk = TouchBarColorPicker(action = function)
+    
+###### Parameters:
+ - alpha (Bool) : True if user can select alpha value, False otherwise
+ - type : The type of color picker. Color picker types are defined in constants (see below)
+ - image (String) : If type is ColorPickerType.image, you can define the image displayed in the color picker button by specifying this parameter. This is the path of an image file.
+ - action (function) : The function that will be called when the user change the value of the color picker
  
+##### Extra Arguments:
+ - color (tuple) : You can retrieve and set the selected color by using or setting this variable. Formatted as (r, g, b, a) where values are decimal numbers between 0 and 1. You can use the color constants (see below).
+
+
+### TouchBarSlider
+
+A slider for the TouchBar
+
+    def function(slider):
+      print ('Value:', slider.value * 100)
+
+    slider = TouchBarSlider(action = function)
+    
+###### Parameters:
+ - title (String) : The title of the slider, that will be displayed next to the slider
+ - value (Float) : The default value as a decimal number between 0 and 1
+ - color (tuple) : The tint color of the slider. Formatted as (r, g, b, a) where values are decimal numbers between 0 and 1. You can use the color constants (see below)
+  - action (function) : The function that will be called when the user change the value of the slider
+
+ 
+##### Extra Arguments:
+ - value (float) : You can get and set the current value of the slider with this argument. Note: it is a decimal number between 0 and 1
+
+
+### TouchBarPopover
+
+A button that will show another TouchBar when clicked.
+
+    label = TouchBarLabel(text = 'Foo Bar')    
+
+    popover = TouchBarPopover([label])
+    
+###### Parameters:
+ - title (String) : The title of the popover, that will be displayed next on the button
+ - shows_close_button (Bool) : If True, once the popover is opened, will show a close button. If False, it won't and the only way to close the popover is to call popover.close()
+ - holdItems (list) : A list containing items that will be shown if the button is touched and hold by the user. It's kind of another TouchBar
+
+ 
+##### Methods:
+ - popover.reload() : If the sub-TouchBar content is modified and the sub-TouchBar needs to be reloaded, this command will do so.
+ - popover.open() : Open the popover
+ - popover.close() : Close the popover
+ 
+ 
+### TouchBarSpace
+
+Space items.<br>
+The flexible space will take all the place it can, so the items will be pushed on the other side of the TouchBar.
+No parameters required, just use items like this:
+
+#### TouchBarSpace.Small()
+#### TouchBarSpace.Large()
+#### TouchBarSpace.Flaxible()
+
