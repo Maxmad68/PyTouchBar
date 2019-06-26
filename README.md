@@ -45,7 +45,7 @@ For example, a typical example would be:
         
  
 ## Setting TouchBar
-Once you have prepared the windows you are using, you would have to set the different TouchBar items you will use (<a href="https://github.com/Maxmad68/PyTouchBar/blob/master/README.md#different-kind-of-touchbar-items">see "Different kind of TouchBar Items</a>).<br>
+Once you have prepared the windows you are using, you would have to set the different TouchBar items you will use (<a href="https://github.com/Maxmad68/PyTouchBar/blob/master/README.md#different-kind-of-touchbar-items">see "Different kind of TouchBar Items"</a>).<br>
 To do so, you'll have to execute the command
 
     ptb.set_touchbar([item1, item2,...])
