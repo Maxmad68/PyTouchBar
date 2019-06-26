@@ -165,3 +165,55 @@ No parameters required, just use items like this:
 #### TouchBarSpace.Large()
 #### TouchBarSpace.Flaxible()
 
+
+
+## Constants
+
+### Color
+Color constants are not required, they just make easier the use of custom colors in TouchBar items.
+For example, instead of setting a red color like this:  (1, 0, 0, 1)  , you could use: Color.red .
+
+ - green
+ - blue
+ - red
+ - yellow
+ - orange
+ - purple
+ - cyan
+ - white
+ - black
+ - clear
+
+
+### ImagePosition
+
+ - noimage
+ - imageonly
+ - left
+ - right
+ - below
+ - above
+ - overlaps
+ 
+### ImageScale
+
+ - proportionnaly_down
+ - axes_independently
+ - none
+ - proportionnaly_up_or_down
+ 
+### Alignment
+
+ - left
+ - right
+ - center
+ - justified
+ - natural
+ 
+### ColorPickerTyped
+Note: it has no effects on the Color Picker, it will just change the image used on the button
+
+- color
+- text
+- stroke
+- image (In that case, define an image with the image parameter)
