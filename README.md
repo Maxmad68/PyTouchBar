@@ -74,7 +74,7 @@ Just showing a standard label in the TouchBar.
 ###### Parameters:
  - text (String) : The text to be shown on the label
  - text_color (tuple) : The color of the text to be shown as (r, g, b, a) where values are decimal numbers between 0 and 1. You can use the color constants (<a href="https://github.com/Maxmad68/PyTouchBar/blob/master/README.md#color">see below</a>)
- - alignment : The alignment of the text in the label. Alignments are defined in constants (see below)
+ - alignment : The alignment of the text in the label. Alignments are defined in constants (<a href="https://github.com/Maxmad68/PyTouchBar/blob/master/README.md#alignment">see below</a>)
  - font_name (String) : Default is Arial. The font name of the text to show
  - font_size (Int) : Default is 16. The font size of the text to show
  
@@ -91,8 +91,8 @@ A button the user can click, that will call actions.
  - title (String or None) : The string that will be displayed in the button
  - color (tuple or None) : The button background color. Formatted as (r, g, b, a) where values are decimal numbers between 0 and 1. You can use the color constants (<a href="https://github.com/Maxmad68/PyTouchBar/blob/master/README.md#color">see below</a>)
  - image (String or None) : A path to an image file that will be shown on the button
- - image_position : The position of the image relative to the title. Image positions are defined in constants (see below)
- - image_scale : The image scaling. Image scales are defined in constants (see below)
+ - image_position : The position of the image relative to the title. Image positions are defined in constants (<a href="https://github.com/Maxmad68/PyTouchBar/blob/master/README.md#imageposition">see below</a>)
+ - image_scale : The image scaling. Image scales are defined in constants (<a href="https://github.com/Maxmad68/PyTouchBar/blob/master/README.md#imagescale">see below</a>)
  - action (function) : The function that will be called when the user touchs the button
  
  
@@ -107,7 +107,7 @@ A color picker right in the TouchBar.
     
 ###### Parameters:
  - alpha (Bool) : True if user can select alpha value, False otherwise
- - type : The type of color picker. Color picker types are defined in constants (see below)
+ - type : The type of color picker. Color picker types are defined in constants (<a href="https://github.com/Maxmad68/PyTouchBar/blob/master/README.md#colorpickertype">see below</a>)
  - image (String) : If type is ColorPickerType.image, you can define the image displayed in the color picker button by specifying this parameter. This is the path of an image file.
  - action (function) : The function that will be called when the user change the value of the color picker
  
