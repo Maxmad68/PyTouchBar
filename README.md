@@ -73,7 +73,7 @@ Just showing a standard label in the TouchBar.
     
 ###### Parameters:
  - text (String) : The text to be shown on the label
- - text_color (tuple) : The color of the text to be shown as (r, g, b, a) where values are decimal numbers between 0 and 1. You can use the color constants (see below)
+ - text_color (tuple) : The color of the text to be shown as (r, g, b, a) where values are decimal numbers between 0 and 1. You can use the color constants (<a href="https://github.com/Maxmad68/PyTouchBar/blob/master/README.md#color">see below</a>)
  - alignment : The alignment of the text in the label. Alignments are defined in constants (see below)
  - font_name (String) : Default is Arial. The font name of the text to show
  - font_size (Int) : Default is 16. The font size of the text to show
@@ -89,7 +89,7 @@ A button the user can click, that will call actions.
     
 ###### Parameters:
  - title (String or None) : The string that will be displayed in the button
- - color (tuple or None) : The button background color. Formatted as (r, g, b, a) where values are decimal numbers between 0 and 1. You can use the color constants (see below)
+ - color (tuple or None) : The button background color. Formatted as (r, g, b, a) where values are decimal numbers between 0 and 1. You can use the color constants (<a href="https://github.com/Maxmad68/PyTouchBar/blob/master/README.md#color">see below</a>)
  - image (String or None) : A path to an image file that will be shown on the button
  - image_position : The position of the image relative to the title. Image positions are defined in constants (see below)
  - image_scale : The image scaling. Image scales are defined in constants (see below)
@@ -112,7 +112,7 @@ A color picker right in the TouchBar.
  - action (function) : The function that will be called when the user change the value of the color picker
  
 ##### Extra Arguments:
- - color (tuple) : You can retrieve and set the selected color by using or setting this variable. Formatted as (r, g, b, a) where values are decimal numbers between 0 and 1. You can use the color constants (see below).
+ - color (tuple) : You can retrieve and set the selected color by using or setting this variable. Formatted as (r, g, b, a) where values are decimal numbers between 0 and 1. You can use the color constants (<a href="https://github.com/Maxmad68/PyTouchBar/blob/master/README.md#color">see below</a>).
 
 
 ### TouchBarSlider
@@ -127,7 +127,7 @@ A slider for the TouchBar
 ###### Parameters:
  - title (String) : The title of the slider, that will be displayed next to the slider
  - value (Float) : The default value as a decimal number between 0 and 1
- - color (tuple) : The tint color of the slider. Formatted as (r, g, b, a) where values are decimal numbers between 0 and 1. You can use the color constants (see below)
+ - color (tuple) : The tint color of the slider. Formatted as (r, g, b, a) where values are decimal numbers between 0 and 1. You can use the color constants (<a href="https://github.com/Maxmad68/PyTouchBar/blob/master/README.md#color">see below</a>)
   - action (function) : The function that will be called when the user change the value of the slider
 
  
