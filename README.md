@@ -34,9 +34,9 @@ For example, a typical example would be:
 
     pygame.init()
     surface = pygame.display.set_mode((100,200))
-	  prepare_pygame()
+    ptb.prepare_pygame()
+    pygame.display.set_caption('Title')
     
-	  pygame.display.set_caption('Title')
     while True:
 	  	for event in pygame.event.get():
 			  if event.type == pygame.QUIT:
@@ -163,7 +163,7 @@ No parameters required, just use items like this:
 
 #### TouchBarSpace.Small()
 #### TouchBarSpace.Large()
-#### TouchBarSpace.Flaxible()
+#### TouchBarSpace.Flexible()
 
 
 
