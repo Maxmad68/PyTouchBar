@@ -12,10 +12,11 @@ from AppKit import *
 from PyObjCTools import AppHelper
 import Cocoa
 
-global DEBUG_LEVEL, buttonIds, tbdelegate
+global DEBUG_LEVEL, buttonIds, tbdelegate, touchbar_items
 DEBUG_LEVEL = 0
 
 buttonIds = {}
+touchbar_items = []
 
 __author__ = "Maxime Madrau (maxime@madrau.fr)"
 
@@ -99,7 +100,7 @@ class TouchBarPopover(object):
 		global touchbar_items_id
 		#instanciedItems = list(map(lambda item: item.makeItem(), self.items))
 
-		self.item = NSPopoverTouchBarItem.alloc().init()
+		self.item = NSPopoverTouchBarItem.alloc().initWithIdentifier_(self.id)
 		self.item.setShowsCloseButton_(self.shows_close_button)
 		
 		self.reload()
@@ -285,7 +286,7 @@ class TouchBarColorPicker(object):
 
 
 class TouchBarSlider(object):
-	def __init__(self, image = None, **kwargs):
+	def __init__(self, **kwargs):
 		self.id = str(uuid.uuid4())
 		self.makeNumber = 0
 		
@@ -294,12 +295,11 @@ class TouchBarSlider(object):
 		self.actionManager = Action.alloc().init()
 		self.actionManager.__dict__
 		self.action = kwargs.get('action', None)
-		
 		self.defaultValue = kwargs.get('value',0.5)
 		
 		self.color = kwargs.get('color', None)
 		
-		self.item = NSSliderTouchBarItem.alloc().init()	
+		self.item = NSSliderTouchBarItem.alloc().initWithIdentifier_(self.id)
 
 		
 	def makeItem(self):
@@ -313,7 +313,6 @@ class TouchBarSlider(object):
 		
 		self.item.setTarget_(self.actionManager)
 		self.item.setAction_("buttonPressed:")
-		
 		self.item.setLabel_(self.title)
 		
 		self.item.slider().setMinValue_(0)
@@ -324,7 +323,6 @@ class TouchBarSlider(object):
 		buttonIds[str(id(self))] = self
 				
 		self.item.setCustomizationLabel_(self.id)
-		
 		return self.item
 	
 	def getValue(self):
@@ -377,8 +375,11 @@ class TouchBarDelegate(NSObject):
 			
 		if DEBUG_LEVEL == 1:	
 			print ('touchBar_makeItemForIdentifier_ : '+ ident)
-			
-		return touchbar_items_id[ident].makeItem()
+		
+		item = touchbar_items_id[ident].makeItem()
+		if DEBUG_LEVEL == 1:	
+			print ("Item: ",item)
+		return item
 		
 		
 
@@ -516,8 +517,8 @@ def test_tk():
 if __name__ == '__main__':
 	fen = Tk()
 	prepare_tk_windows(fen)
-	lbl1 = TouchBarLabel(text="Coucou")
-	lbl2 = TouchBarLabel(text="Bonjour")
+	lbl1 = TouchBarLabel(text="Hello")
+	lbl2 = TouchBarLabel(text="World!")
 	set_touchbar([lbl1, TouchBarSpace.Flexible(), lbl2])
 
 	fen.mainloop()
