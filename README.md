@@ -1,5 +1,5 @@
 # PyTouchBar
-A NSTouchBar Wrapper for Python. It olny works (for the moment) with Tkinter and PyGame.<br>
+A NSTouchBar Wrapper for Python. It only works (for the moment) with Tkinter and PyGame.<br>
 It mainly depends on PyObjc to wrap NSTouchBar and related classes.<br>
 Note: It will (of course) only works on MacBook Pro with TouchBars, or on a TouchBar Simulator (<a href="https://github.com/sindresorhus/touch-bar-simulator">you have a good one here</a>.)
 
