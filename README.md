@@ -4,7 +4,7 @@ It mainly depends on PyObjc to wrap NSTouchBar and related classes.<br>
 Note: It will (of course) only works on MacBook Pro with TouchBars, or on a TouchBar Simulator (<a href="https://github.com/sindresorhus/touch-bar-simulator">you have a good one here</a>.)
 
 # How to use
-Just download the PyToucbBar.py into your project directory, import it and that's it!
+Just download the PyTouchBar.py into your project directory, import it and that's it!
 
 # Documentation
 Well, this is the interesting part.<br>
@@ -71,6 +71,8 @@ Just showing a standard label in the TouchBar.
 
     label = TouchBarLabel(text = 'Foo Bar')
     
+![Example](http://madrau.fr/PyTouchBar-Github/tblabel.png)
+    
 ###### Parameters:
  - text (String) : The text to be shown on the label
  - text_color (tuple) : The color of the text to be shown as (r, g, b, a) where values are decimal numbers between 0 and 1. You can use the color constants (<a href="https://github.com/Maxmad68/PyTouchBar/blob/master/README.md#color">see below</a>)
@@ -86,6 +88,8 @@ A button the user can click, that will call actions.
       print ('Button clicked!')
 
     button = TouchBarButton(title = 'Click me!', action = function)
+    
+![Example](http://madrau.fr/PyTouchBar-Github/tbbutton.png)
     
 ###### Parameters:
  - title (String or None) : The string that will be displayed in the button
@@ -104,6 +108,9 @@ A color picker right in the TouchBar.
       print ('Color:', picker.color)
 
     cpk = TouchBarColorPicker(action = function)
+    
+![Example](http://madrau.fr/PyTouchBar-Github/tbcpk1.png)
+![Example](http://madrau.fr/PyTouchBar-Github/tbcpk2.png)
     
 ###### Parameters:
  - alpha (Bool) : True if user can select alpha value, False otherwise
@@ -124,6 +131,8 @@ A slider for the TouchBar
 
     slider = TouchBarSlider(action = function)
     
+![Example](http://madrau.fr/PyTouchBar-Github/tbslider.png)
+    
 ###### Parameters:
  - title (String) : The title of the slider, that will be displayed next to the slider
  - value (Float) : The default value as a decimal number between 0 and 1
@@ -139,9 +148,12 @@ A slider for the TouchBar
 
 A button that will show another TouchBar when clicked.
 
-    label = TouchBarLabel(text = 'Foo Bar')    
+    label = TouchBarLabel(text = 'Inside my Popover')    
 
     popover = TouchBarPopover([label])
+    
+![Example](http://madrau.fr/PyTouchBar-Github/tbpopover1.png)
+![Example](http://madrau.fr/PyTouchBar-Github/tbpopover2.png)
     
 ###### Parameters:
  - title (String) : The title of the popover, that will be displayed next on the button
