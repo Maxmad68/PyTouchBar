@@ -24,6 +24,9 @@ __author__ = "Maxime Madrau (maxime@madrau.fr)"
 # Constants
 
 class Color:
+	'''
+	Some predefined and most used color constants
+	'''
 	green = (0,1,0,1)
 	blue = (0,0,1,1)
 	red = (1,0,0,1)
@@ -36,6 +39,9 @@ class Color:
 	clear = (1,1,1,0)
 	
 class ImagePosition:
+	'''
+	Position of the image compared to the text
+	'''
 	noimage = 0
 	imageonly = 1
 	left = 2
@@ -45,12 +51,18 @@ class ImagePosition:
 	overlaps = 6
 	
 class ImageScale:
+	'''
+	Scale of an image in a touchbar item
+	'''
 	proportionnaly_down = 0
 	axes_independently = 1
 	none = 2
 	proportionnaly_up_or_down = 3
 	
 class Alignment:
+	'''
+	Alignment of the text in the touchbar item
+	'''
 	left = 0
 	right = 1
 	center = 2
@@ -62,9 +74,15 @@ class Alignment:
 
 
 			
-class TouchBarItems:	
+class TouchBarItems:
+	'''
+	Predefined touchbar items
+	'''
 	
 	class Space:
+		'''
+		A Space item is an empty item, its only purpose is to take place
+		'''
 		class Small(object):
 			def __init__(self):
 				self.id = "NSTouchBarItemIdentifierFixedSpaceSmall"
@@ -74,10 +92,30 @@ class TouchBarItems:
 				self.id = "NSTouchBarItemIdentifierFixedSpaceLarge"
 							
 		class Flexible(object):
+			'''
+			A Flexible space is a space item that take all the space it can
+			'''
 			def __init__(self):
 				self.id = "NSTouchBarItemIdentifierFlexibleSpace"
+					
 						
 	class Popover(object):
+		'''
+		A Popover item is an item that will act just like a "subtouchbar": is looks like a button that
+		will present another touchbar content when pressed.
+		
+		Parameters:
+			- title (String) : the title of the popover button
+			- shows_close_button (Bool) : Optional: if true, a "x" button will be presented in the popover to close it
+			- holdItems ([TouchBarItem]) : The list of touchbar items contained by the popover
+		
+		Methods:
+			reload() : Reload the popover content
+			open() : Open the popover
+			close() : Close the popover
+		'''
+		
+		 
 		def __init__(self, items, **kwargs):
 			global tbdelegate
 			self.id = str(uuid.uuid4())
@@ -168,6 +206,17 @@ class TouchBarItems:
 
 		
 	class Label(object):
+		'''
+		A popover is a touchbar item that will present text.
+		
+		Parameters:
+			- text (String) : The string to be presented
+			- text_color ( (r, g, b, a) or Color constant, optional) : The foreground color of the text
+			- alignment (Alignment constant, optional) : Where the text needs to be presented in the item
+			- font_name (String, optional) : The font family name
+			- font_size (Int, optional) : The size of the font in pts
+		'''
+		
 		def __init__(self, **kwargs):
 			self.id = str(uuid.uuid4())
 			self.textBase = NSString(kwargs.get('text','Label'))
@@ -243,6 +292,19 @@ class TouchBarItems:
 			
 
 	class Button(object):
+		'''
+		A Button is an item that will call an action when tapped
+		It can shows text, image or both.
+		
+		Parameters:
+			- title (String, optional) : The text that will be shown on the button
+			- color ( (r, g, b, a) or Color constant, optional) : The background color of the button
+			- image (String, optional) : The path of the image file that will be shown on the button
+			- image_position (ImagePosition constant, optional) : The position of the image compared to the text
+			- image_scale (ImageScale constant) : The image scaling
+			- action ( function(self) ) : The action that will be called when button is pressed
+		'''
+		
 		def __init__(self, **kwargs):
 			self.id = str(uuid.uuid4())
 			
@@ -322,7 +384,36 @@ class TouchBarItems:
 			
 			
 	class SegmentedControls(object):
+		'''
+		A SegmentedControls item if a group of several buttons that can act one of the folowing way:
+			- Multiple buttons grouped
+			- Select one of the buttons
+			- Select several buttons of the group
+		It can be populate with strings (which will just act like buttons title), or with 
+			SegmentedControls.Control that allows to create more complex buttons.
+			
+		Parameters:
+			- controls ([String and/or SegmentedControls.Control]) : Controls of the SegmentedControls
+			- type (SegmentedControls.Type enum constant) : How the SegControls will act (see list up there)
+			- action ( function(self) ) : Action that will be called when the user press/select a control
+			
+		Methods:
+			- sc.selectedItems() -> [SegmentedControls.Control] : When called, will return the list containing every selected controls
+		'''
 		class Control(object):
+			'''
+			A SegmentedControls.Control] is a SegmentedControls button more complex than just a title.
+			You can add image to it, change its width and more.
+			
+			Parameters:
+				- title (String, optional) : Text that will be shown on the control
+				- image (String, optional) : The image file path to show on the button
+				- width (Int, optional) : The width of the button in pxs
+				- enabled (Bool) : If False, the button will be grayed out and not clickable
+				- selected (Bool) : Is the button currently selected?
+				- image_scale (ImageScale constant) : The image scaling
+			'''
+				
 			def __init__(self, **kwargs):
 				self.title_ = kwargs.get('title', 'Control')
 				imageName = kwargs.get('image', None)
@@ -382,6 +473,7 @@ class TouchBarItems:
 				
 				
 		class Type:
+			''' How the Seg Controls will act'''
 			select_one = 0
 			select_any = 1
 			momentary = 2
@@ -451,7 +543,20 @@ class TouchBarItems:
 			
 			
 	class ColorPicker(object):
+		'''
+		A ColorPicker item is a button that when it is pressed, will display a color selector in the touchbar.
+		It is used in Word or Pages to set font color for example
+		
+		Parameters:
+			- alpha (Bool) : If True, user can change r, g, b AND alpha value. If False, just r, g, b.
+			- type (ColorPicker.Type constant) : The style of the ColorPicker button
+			- image (string) : If type == Type.image, the button will present an image, the path of its file is this parameter.
+			- action ( function(self) ) : A method that will be called when user change the color value
+			- color ( (r, g, b, a) or Color constant) : The current color of the picker.
+		'''
+		
 		class Type:
+			''' The style of the ColorPicker button'''
 			color = 0
 			text = 1
 			stroke = 2
@@ -517,6 +622,15 @@ class TouchBarItems:
 
 
 	class Slider(object):
+		'''
+		A Slider is an item that will allows the user to change a number value by dragging a control over the touchbar.
+		
+		Parameters:
+			- title (String, optional) : A text that will be presented next to the slider
+			- value (Float) : The value of the slider, between 0 and 1
+			- color ( (r, g, b, a) or Color constant, optional) : The tint color of the slider
+			- action ( function(self) ) : The function that will be called when the user change the value of the slider
+		''' 
 		def __init__(self, **kwargs):
 			self.id = str(uuid.uuid4())
 			self.makeNumber = 0
@@ -566,6 +680,10 @@ class TouchBarItems:
 		
 
 class Action(NSObject):
+	'''
+	A "bridge" between an objc selector and a Python Action
+	This class is needed in order to keep a reference of the selector.
+	'''
 	def buttonPressed_(self, view):
 		global buttonIds, DEBUG_LEVEL
 		if DEBUG_LEVEL == 1:
@@ -582,7 +700,13 @@ class Action(NSObject):
 
 	
 class NSWindowControllerTBModified (NSWindowController):
+	'''
+	A NSWindowController that handle touchbar methods.
+	It will be applied to windows with the "prepare_window" functions.
+	'''
+	
 	def touchBar(self):
+		''' Give the touchbar to the window'''
 		global DEBUG_LEVEL, buttonIds, touchbar_items_id, touchbar_items, tbdelegate
 		if DEBUG_LEVEL == 1:
 			print ('TouchBar initializing') 
@@ -601,6 +725,9 @@ class NSWindowControllerTBModified (NSWindowController):
 	
 		
 class TouchBarDelegate(NSObject):
+	'''
+	A TouchBarDelegate that will create and render touchbar from its content-list items's id
+	'''
 	def touchBar_makeItemForIdentifier_(self, bar, ident):
 		global touchbar_items_id, touchbar_items, DEBUG_LEVEL
 			
@@ -617,6 +744,13 @@ class TouchBarDelegate(NSObject):
 	
 
 def set_touchbar(items):
+	'''
+	Set the content of the touchbar
+	
+	Parameters:
+		- items ( [TouchBarItem class instances] ) : The items that will be presented in the touchbar
+	'''
+	
 	global touchbar_items_id, touchbar_items
 	
 	touchbar_items = items
@@ -634,6 +768,9 @@ window_controllers = []
 tbdelegate = TouchBarDelegate.alloc().init()
 
 def notify(a):
+	'''
+	A function that will be called when a Tk window is opened. This is bined to the window in the prepare_tk_windows method
+	'''
 	global delegate, DEBUG_LEVEL
 	make_crash = False
 	
@@ -647,6 +784,9 @@ def notify(a):
 		objc.informal_protocol('NSTouchBarProvider', selectors = [1]) # Make crash (don't know why, but it does.)
 	
 def reload_touchbar():
+	'''
+	Rebuild the touchbar, after a modification or a change in its content
+	'''
 	global delegate, window_controllers, DEBUG_LEVEL
 	for controller in window_controllers:
 		if DEBUG_LEVEL == 1:
@@ -654,6 +794,13 @@ def reload_touchbar():
 		controller.setTouchBar_(controller.touchBar())
 
 def prepare_tk_windows(windows):
+	'''
+	This function is needed to prepare Tk window(s) to "host" a touchbar.
+	Call this function before mainlooping the window.
+	
+	Parameters:
+		- windows ( [Tk] or Tk) : A Tk instance OR a list of Tk instances
+	'''
 	global delegate
 	if isinstance(windows, list):
 		for window in windows:
@@ -662,23 +809,37 @@ def prepare_tk_windows(windows):
 		prepare_tk_windows([windows])
 		
 def resetPreparedWindows():
+	'''
+	Clear touchbar from all windows
+	'''
 	windows = NSApplication.sharedApplication().windows()
 	for window in windows:
 		window_controllers.append(NSWindowControllerTBModified.alloc().initWithWindow_(window))
 		
 def prepare_pygame():
+	'''
+		This function is needed to prepare Pygame window to "host" a touchbar.
+		Call this function before mainlooping the pygame.
+	'''
 	windows = NSApplication.sharedApplication().windows()
 	for window in windows:
 		if window.windowController() == None:
 			window_controllers.append(NSWindowControllerTBModified.alloc().initWithWindow_(window))
 
 def set_touchbar_pygame():
+	'''
+	WIP
+	'''
 	windows = NSApplication.sharedApplication().windows()
 	for window in windows:
 		view = window.contentView().subviews()[0]
 
 
 class TouchBarTk(Tk):
+	'''
+	A Tk subclassed to automatically be prepared to host a touchbar
+	It takes same arguments as Tk
+	'''
 	def __init__(self, *args, **kwargs):
 		Tk.__init__(self, *args, **kwargs)
 		prepare_tk_windows(self)
@@ -691,8 +852,8 @@ def testTk():
 	btn = Button(fen, text="Hello")
 	btn.pack()
 	
-	btn1 = TouchBarItems.SegmentedControls.Item(title='Hello', alignment = Alignment.left, selected = True, width = 100)
-	btn2 = TouchBarItems.SegmentedControls.Item(title='World', alignment = Alignment.right, enabled = True, width = 100)
+	btn1 = TouchBarItems.SegmentedControls.Control(title='Hello', alignment = Alignment.left, selected = True, width = 100)
+	btn2 = TouchBarItems.SegmentedControls.Control(title='World', alignment = Alignment.right, enabled = True, width = 100)
 	
 	def action(segCont):
 		print (list(segCont.selectedItems()))
