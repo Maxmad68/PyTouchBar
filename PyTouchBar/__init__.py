@@ -219,6 +219,7 @@ class TouchBarItems:
 		
 		def __init__(self, **kwargs):
 			self.id = str(uuid.uuid4())
+			self.label = None
 			self.textBase = NSString(kwargs.get('text','Label'))
 			self.text_color_ = kwargs.get('text_color',Color.white)
 			self.alignment_ = kwargs.get('alignment',Alignment.center)
@@ -244,7 +245,8 @@ class TouchBarItems:
 			return self.label.stringValue()
 		
 		def textSetter(self, newValue):
-			self.label.setStringValue_(NSString(newValue))
+			if self.label:
+				self.label.setStringValue_(NSString(newValue))
 			
 		text = property(textGetter, textSetter)
 		
