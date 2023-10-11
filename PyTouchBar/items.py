@@ -42,12 +42,12 @@ class Space:
 	A Space item is an empty item, its only purpose is to take place
 	'''
 	class Small(TouchBarBaseItem):
-		def __init__(self, customication_mode = 0):
+		def __init__(self, customization_mode = 0):
 			self.id = "NSTouchBarItemIdentifierFixedSpaceSmall"
 			self.customization_mode = customization_mode
 			
 	class Large(TouchBarBaseItem):
-		def __init__(self, customication_mode = 0):
+		def __init__(self, customization_mode = 0):
 			self.id = "NSTouchBarItemIdentifierFixedSpaceLarge"
 			self.customization_mode = customization_mode
 			
